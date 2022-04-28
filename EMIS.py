@@ -3,10 +3,12 @@ EMIS Group test for joining JSON files to a FHIR file
 This is donw with the use of Pandas and
 '''
 
-import pandas as pd
 import os
 
-path = os.path.join("C:\\Users", os.getenv('username'), "Desktop\\exa-data-eng-assessment-main", "")
+import pandas as pd
+import json
+
+path = os.path.join("C:\\Users", os.getenv('username'), "Python-dev\\EMIStest", "")
 print(path)
 
 base_dir = os.path.dirname(path)
@@ -19,17 +21,36 @@ for filename in os.listdir(data_dir):
     json_path = os.path.join(data_dir,filename)
 
     this_df = pd.read_json(json_path)
-    #print(this_df.head())
+    this_df.info()
     # this is the dataframe that appends the each data file in
-    my_dataframe.append(this_df)
-    # this is all of the data in one data frame
-    my_entire_dataframe = pd.concat(my_dataframe)
-    print(my_entire_dataframe.head(n=2))
-    # prints 2 of each of the head of the data files from the whole data frame
+    entry = this_df['entry'].values[0]
 
-    # create a new complete data frame
-    cashe_dir = os.path.join(base_dir,"cashe")
-    os.makedirs(cashe_dir,exist_ok=True)
+    entry_df = pd.DataFrame(entry)
+    # print(entry_df)
+    # out = os.path.join(base_dir,"out.csv")
+    # entry_df.to_csv(out)
+    url_out = entry_df['resource'].values[2]
+    id_out = entry_df['resource'].values[1]
+    meta = entry_df['resource'].values[3]
+    profile = url_out['profile']
+
+    text = entry_df['resource'].values[4][0]
+    print(text)
+    # print(url_out)
+    print(id_out)
+    print(profile[0])
+    print(meta)
+
+
+    # clean up the data
+def clean_up(row):
+    pass
+
+
+
+
+
+
 
 
 
