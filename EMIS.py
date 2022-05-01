@@ -5,10 +5,15 @@ This is donw with the use of Pandas and
 
 import os
 
+<<<<<<< HEAD
 import pandas as pd
 import json
 
 path = os.path.join("C:\\Users", os.getenv('username'), "Python-dev\\EMIStest", "")
+=======
+
+path = os.path.join("C:\\Users", os.getenv('username'), "python-dev/EMISGroup-solusion/", "")
+>>>>>>> origin/master
 print(path)
 
 base_dir = os.path.dirname(path)
@@ -16,11 +21,12 @@ data_dir = os.path.join(base_dir,"data")
 my_dataframe = []
 
 for filename in os.listdir(data_dir):
-    print(filename)
+
     # get the path of each of the data files
     json_path = os.path.join(data_dir,filename)
 
     this_df = pd.read_json(json_path)
+<<<<<<< HEAD
     this_df.info()
     # this is the dataframe that appends the each data file in
     entry = this_df['entry'].values[0]
@@ -48,6 +54,12 @@ def clean_up(row):
 
 
 
+=======
+
+    # this is now normalized into rows and columns
+    result = pd.json_normalize(this_df)
+    print(result)
+>>>>>>> origin/master
 
 
 
