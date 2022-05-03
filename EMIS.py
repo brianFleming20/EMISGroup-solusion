@@ -5,20 +5,21 @@ This is donw with the use of Pandas and
 
 import os
 
-<<<<<<< HEAD
+
 import pandas as pd
 import json
 
-path = os.path.join("C:\\Users", os.getenv('username'), "Python-dev\\EMIStest", "")
-=======
 
-path = os.path.join("C:\\Users", os.getenv('username'), "python-dev/EMISGroup-solusion/", "")
->>>>>>> origin/master
+path = os.path.join("C:\\Users", os.getenv('username'), "Python-dev\\EMIStest", "")
+
 print(path)
 
 base_dir = os.path.dirname(path)
 data_dir = os.path.join(base_dir,"data")
 my_dataframe = []
+out_path = os.path.join(base_dir,"data")
+
+index = 1
 
 for filename in os.listdir(data_dir):
 
@@ -26,7 +27,7 @@ for filename in os.listdir(data_dir):
     json_path = os.path.join(data_dir,filename)
 
     this_df = pd.read_json(json_path)
-<<<<<<< HEAD
+
     this_df.info()
     # this is the dataframe that appends the each data file in
     entry = this_df['entry'].values[0]
@@ -47,19 +48,22 @@ for filename in os.listdir(data_dir):
     print(profile[0])
     print(meta)
 
+    out = os.path.join(out_path, f"{index}out.csv")
+    entry_df.to_csv(out)
+    my_dataframe.append(entry_df)
+    print(my_dataframe)
 
     # clean up the data
-def clean_up(row):
-    pass
+# def clean_up(row):
+#     pass
 
 
 
-=======
 
     # this is now normalized into rows and columns
     result = pd.json_normalize(this_df)
     print(result)
->>>>>>> origin/master
+
 
 
 
